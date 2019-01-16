@@ -31,7 +31,7 @@ $ docker run --rm -it --privileged \
 Can also be used a base image in a multi-stage build where a rootfs is customized.
 
 ```
-FROM qemu-rootfs as rootfs
+FROM ubuntu:latest as rootfs
 RUN apt-get update && apt-get install -y curl
 
 FROM qemu-rootfs
