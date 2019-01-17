@@ -23,7 +23,7 @@ fi
 exec qemu-system-x86_64 \
   -no-reboot \
   -kernel "$KERNEL" \
-  -append "root=/dev/sda console=ttyS0 $APPEND" \
+  -append "root=/dev/sda rw console=ttyS0 $APPEND" \
   -display none -serial stdio \
   $KVM \
   -m "$MEM" \
