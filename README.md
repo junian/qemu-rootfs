@@ -21,7 +21,7 @@ $ sudo debootstrap --arch amd64 bionic /mnt/ubuntu http://archive.ubuntu.com/ubu
 
 $ docker run --rm -it --privileged \
 	-v "/dev/kvm:/dev/kvm" \
-	-v "/boot/vmlinuz-$(uname -r):/bzImage:ro" \
+	-v "/boot/vmlinuz-$(uname -r):/boot/vmlinuz:ro" \
 	-v "/mnt/ubuntu:/rootfs:ro" \
 	qemu-rootfs
 ```

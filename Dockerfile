@@ -7,7 +7,7 @@ RUN apk add --no-cache \
 	qemu-system-x86_64
 
 ENV CHROOT /rootfs
-ENV KERNEL /bzImage
+ENV KERNEL /boot/vmlinuz
 
 ENV MEM 2G
 ENV HDA /hda.img
