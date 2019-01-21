@@ -18,12 +18,13 @@ Can be used to test rootfs created with [debootstrap](https://wiki.debian.org/De
 
 ```sh
 $ sudo debootstrap --arch amd64 bionic /mnt/ubuntu http://archive.ubuntu.com/ubuntu/
+$ echo "root:passworD1" | sudo chpasswd --root /mnt/ubuntu
 
 $ docker run --rm -it --privileged \
-	-v "/dev/kvm:/dev/kvm" \
-	-v "/boot/vmlinuz-$(uname -r):/boot/vmlinuz:ro" \
-	-v "/mnt/ubuntu:/rootfs:ro" \
-	qemu-rootfs
+      -v "/dev/kvm:/dev/kvm" \
+      -v "/boot/vmlinuz-$(uname -r):/boot/vmlinuz:ro" \
+      -v "/mnt/ubuntu:/rootfs:ro" \
+    qemu-rootfs
 ```
 
 ## Docker multi-stage build
