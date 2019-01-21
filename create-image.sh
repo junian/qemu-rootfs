@@ -8,6 +8,7 @@ usage() {
 
 SIZE=$(du -s "$CHROOT" | awk "{print int(\$1)}")
 qemu-img create "$HDA" "${SIZE}k"
+qemu-img resize "$HDA" +500m
 mkfs.ext2 "$HDA"
 
 mkdir /mnt/hda
@@ -15,8 +16,6 @@ mount -o loop "$HDA" /mnt/hda || usage
 cp -pR "$CHROOT"/* /mnt/hda
 umount /mnt/hda
 rmdir /mnt/hda
-
-qemu-img resize "$HDA" +500m
 
 if [ -w "$CHROOT" ]; then
   rm -rf "$CHROOT"
