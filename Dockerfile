@@ -8,7 +8,8 @@ RUN apk add --no-cache \
 	bash \
 	e2fsprogs \
 	qemu-img \
-	qemu-system-x86_64
+	qemu-system-x86_64 \
+	linux-vanilla
 
 ENV CHROOT /rootfs
 ENV KERNEL /boot/vmlinuz

@@ -12,8 +12,8 @@ if [ ! -e "$HDA_QCOW2" ]; then
 fi
 
 if [ ! -e "$KERNEL" ]; then
-  echo "missing KERNEL=$KERNEL" >&2
-  exit 1
+  echo "missing KERNEL=$KERNEL, will use container's kernel" >&2
+  export KERNEL="/boot/vmlinuz-vanilla"
 fi
 
 if [ -n "$1" ]; then
