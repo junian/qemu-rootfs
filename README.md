@@ -42,10 +42,16 @@ $ docker run --rm -it --privileged \
 
 Can also be used a base image in a multi-stage build where a rootfs is customized.
 
-```
-FROM ubuntu:latest as rootfs
+```sh
+$ docker build --tag qemu-ubuntu - <<EOF
+FROM ubuntu:bionic as rootfs
 RUN apt-get update && apt-get install -y curl
 
 FROM qemu-rootfs
 COPY --from=rootfs / /rootfs
+EOF
+
+$ docker run --rm -it --privileged \
+      --volume "/boot/vmlinuz-$(uname -r):/boot/vmlinuz:ro" \
+    qemu-ubuntu
 ```
