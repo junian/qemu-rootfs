@@ -18,6 +18,7 @@ ENV HDA /hda.img
 ENV HDA_SIZE +500m
 
 COPY create-image.sh .
+COPY extract-tar.sh .
 COPY entrypoint.sh .
 COPY qemu.sh .
 

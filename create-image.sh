@@ -1,3 +1,5 @@
+#!/bin/bash
+
 set -ex
 
 # TODO: Implement with --privileged

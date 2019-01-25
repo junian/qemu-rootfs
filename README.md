@@ -27,6 +27,17 @@ $ docker run --rm -it --privileged \
     qemu-rootfs
 ```
 
+
+## Ubuntu Cloud Image
+
+```sh
+$ wget http://cloud-images.ubuntu.com/releases/bionic/release/ubuntu-18.04-server-cloudimg-amd64-root.tar.xz
+$ docker run --rm -it --privileged \
+      --volume "/boot/vmlinuz-$(uname -r):/boot/vmlinuz:ro" \
+      --volume "$PWD/ubuntu-18.04-server-cloudimg-amd64-root.tar.xz:/rootfs.tar.xz:ro" \
+    qemu-rootfs
+````
+
 ## Docker image as rootfs
 
 Set `ROOTFS_IMAGE` to any Docker base image.
