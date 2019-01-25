@@ -7,7 +7,7 @@ Dockerized QEMU that boots an extracted Linux rootfs.
 Build Docker image.
 
 ```sh
-$ docker build -t qemu-rootfs .
+$ docker build --tag qemu-rootfs .
 ```
 
 ## Usage
@@ -21,9 +21,20 @@ $ sudo debootstrap --arch amd64 bionic /mnt/ubuntu http://archive.ubuntu.com/ubu
 $ echo "root:passworD1" | sudo chpasswd --root /mnt/ubuntu
 
 $ docker run --rm -it --privileged \
-      -v "/dev/kvm:/dev/kvm" \
-      -v "/boot/vmlinuz-$(uname -r):/boot/vmlinuz:ro" \
-      -v "/mnt/ubuntu:/rootfs:ro" \
+      --volume "/dev/kvm:/dev/kvm" \
+      --volume "/boot/vmlinuz-$(uname -r):/boot/vmlinuz:ro" \
+      --volume "/mnt/ubuntu:/rootfs:ro" \
+    qemu-rootfs
+```
+
+## Docker image as rootfs
+
+Set `ROOTFS_IMAGE` to any Docker base image.
+
+```sh
+$ docker build --build-arg "ROOTFS_IMAGE=ubuntu:bionic" --tag qemu-rootfs .
+$ docker run --rm -it --privileged \
+      --volume "/boot/vmlinuz-$(uname -r):/boot/vmlinuz:ro" \
     qemu-rootfs
 ```
 

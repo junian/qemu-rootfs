@@ -1,3 +1,7 @@
+ARG ROOTFS_IMAGE=scratch
+FROM ${ROOTFS_IMAGE} as rootfs
+
+
 FROM alpine:3.8
 
 RUN apk add --no-cache \
@@ -16,5 +20,7 @@ ENV HDA_SIZE +500m
 COPY create-image.sh .
 COPY entrypoint.sh .
 COPY qemu.sh .
+
+COPY --from=rootfs / /rootfs
 
 ENTRYPOINT [ "./entrypoint.sh" ]
