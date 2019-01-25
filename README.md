@@ -22,7 +22,6 @@ $ echo "root:passworD1" | sudo chpasswd --root /mnt/ubuntu
 
 $ docker run --rm -it --privileged \
       --volume "/dev/kvm:/dev/kvm" \
-      --volume "/boot/vmlinuz-$(uname -r):/boot/vmlinuz:ro" \
       --volume "/mnt/ubuntu:/rootfs:ro" \
     qemu-rootfs
 ```
@@ -33,7 +32,6 @@ $ docker run --rm -it --privileged \
 ```sh
 $ wget http://cloud-images.ubuntu.com/releases/bionic/release/ubuntu-18.04-server-cloudimg-amd64-root.tar.xz
 $ docker run --rm -it --privileged \
-      --volume "/boot/vmlinuz-$(uname -r):/boot/vmlinuz:ro" \
       --volume "$PWD/ubuntu-18.04-server-cloudimg-amd64-root.tar.xz:/rootfs.tar.xz:ro" \
     qemu-rootfs
 ````
@@ -41,7 +39,6 @@ $ docker run --rm -it --privileged \
 ```sh
 $ wget http://cloud-images.ubuntu.com/releases/bionic/release/ubuntu-18.04-server-cloudimg-amd64.img
 $ docker run --rm -it --privileged \
-      --volume "/boot/vmlinuz-$(uname -r):/boot/vmlinuz:ro" \
       --volume "$PWD/ubuntu-18.04-server-cloudimg-amd64.img:/hda.img" \
     qemu-rootfs
 ````
@@ -53,7 +50,6 @@ Set `ROOTFS_IMAGE` to any Docker base image.
 ```sh
 $ docker build --build-arg "ROOTFS_IMAGE=ubuntu:bionic" --tag qemu-rootfs .
 $ docker run --rm -it --privileged \
-      --volume "/boot/vmlinuz-$(uname -r):/boot/vmlinuz:ro" \
     qemu-rootfs
 ```
 
@@ -71,6 +67,5 @@ COPY --from=rootfs / /rootfs
 EOF
 
 $ docker run --rm -it --privileged \
-      --volume "/boot/vmlinuz-$(uname -r):/boot/vmlinuz:ro" \
     qemu-ubuntu
 ```
