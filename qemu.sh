@@ -6,8 +6,8 @@ if [ -e "/dev/kvm" ]; then
   KVM="--enable-kvm"
 fi
 
-if [ ! -e "$HDA" ]; then
-  echo "missing HDA=$HDA" >&2
+if [ ! -e "$HDA_QCOW2" ]; then
+  echo "missing HDA_QCOW2=$HDA_QCOW2" >&2
   exit 1
 fi
 
@@ -28,4 +28,4 @@ exec qemu-system-x86_64 \
   $KVM \
   -m "$MEM" \
   -netdev type=user,id=net0 -device virtio-net-pci,netdev=net0 \
-  -hda "$HDA"
+  -hda "$HDA_QCOW2"

@@ -14,7 +14,8 @@ ENV CHROOT /rootfs
 ENV KERNEL /boot/vmlinuz
 
 ENV MEM 2G
-ENV HDA /hda.img
+ENV HDA_RAW /hda.img
+ENV HDA_QCOW2 /hda.qcow2
 ENV HDA_SIZE +500m
 
 COPY create-image.sh .
