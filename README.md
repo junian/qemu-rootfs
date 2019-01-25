@@ -20,7 +20,7 @@ Can be used to test rootfs created with [debootstrap](https://wiki.debian.org/De
 $ sudo debootstrap --arch amd64 bionic /mnt/ubuntu http://archive.ubuntu.com/ubuntu/
 $ echo "root:passworD1" | sudo chpasswd --root /mnt/ubuntu
 
-$ docker run --rm -it --privileged \
+$ docker run --rm -it \
       --volume "/dev/kvm:/dev/kvm" \
       --volume "/boot/vmlinuz-$(uname -r):/boot/vmlinuz:ro" \
       --volume "/mnt/ubuntu:/rootfs:ro" \
@@ -32,7 +32,7 @@ $ docker run --rm -it --privileged \
 
 ```sh
 $ wget http://cloud-images.ubuntu.com/releases/bionic/release/ubuntu-18.04-server-cloudimg-amd64-root.tar.xz
-$ docker run --rm -it --privileged \
+$ docker run --rm -it \
       --volume "/boot/vmlinuz-$(uname -r):/boot/vmlinuz:ro" \
       --volume "$PWD/ubuntu-18.04-server-cloudimg-amd64-root.tar.xz:/rootfs.tar.xz:ro" \
     qemu-rootfs
@@ -40,7 +40,7 @@ $ docker run --rm -it --privileged \
 
 ```sh
 $ wget http://cloud-images.ubuntu.com/releases/bionic/release/ubuntu-18.04-server-cloudimg-amd64.img
-$ docker run --rm -it --privileged \
+$ docker run --rm -it \
       --volume "/boot/vmlinuz-$(uname -r):/boot/vmlinuz:ro" \
       --volume "$PWD/ubuntu-18.04-server-cloudimg-amd64.img:/hda.img" \
     qemu-rootfs
@@ -52,7 +52,7 @@ Set `ROOTFS_IMAGE` to any Docker base image.
 
 ```sh
 $ docker build --build-arg "ROOTFS_IMAGE=ubuntu:bionic" --tag qemu-rootfs .
-$ docker run --rm -it --privileged \
+$ docker run --rm -it \
       --volume "/boot/vmlinuz-$(uname -r):/boot/vmlinuz:ro" \
     qemu-rootfs
 ```
@@ -70,7 +70,7 @@ FROM qemu-rootfs
 COPY --from=rootfs / /rootfs
 EOF
 
-$ docker run --rm -it --privileged \
+$ docker run --rm -it \
       --volume "/boot/vmlinuz-$(uname -r):/boot/vmlinuz:ro" \
     qemu-ubuntu
 ```
