@@ -11,6 +11,7 @@ ENV KERNEL /boot/vmlinuz
 
 ENV MEM 2G
 ENV HDA /hda.img
+ENV HDA_SIZE +500m
 
 COPY create-image.sh .
 COPY entrypoint.sh .
